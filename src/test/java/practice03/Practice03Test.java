@@ -1,11 +1,11 @@
-//package practice03;
-//
-//import org.junit.Test;
-//
-//import static org.fest.assertions.api.Assertions.assertThat;
-//
-//public class Practice03Test {
-//    @Test
+package practice03;
+
+import org.junit.Test;
+
+import static org.fest.assertions.api.Assertions.assertThat;
+
+public class Practice03Test {
+    //    @Test
 //    public void should_person_have_name_and_age() throws Exception {
 //        Person person = new Person("Tom", 21);
 //        assertThat(person.getName()).isEqualTo("Tom");
@@ -40,9 +40,9 @@
 //        assertThat(tom.getAge()).isEqualTo(21);
 //    }
 //
-//    @Test
-//    public void should_worker_introduce_itself_with_no_field() throws Exception {
-//        Worker tom = new Worker("Tom", 21);
-//        assertThat(tom.introduce()).isEqualTo("I am a Worker. I have a job.");
-//    }
-//}
+    @Test
+    public void should_worker_introduce_itself_with_no_field() throws Exception {
+        Worker tom = new Worker("Tom", 21);
+        assertThat(tom.introduce()).isEqualTo("I am a Worker. I have a job.");
+    }
+}
