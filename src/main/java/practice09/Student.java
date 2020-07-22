@@ -1,6 +1,6 @@
 package practice09;
 
-public class Student extends Person{
+public class Student extends Person {
     private Klass klass;
 
     public Student(int id, String name, int age, Klass klass) {
@@ -21,7 +21,7 @@ public class Student extends Person{
         String result = super.introduce() + " I am a Student.";
         Student leader = this.getKlass().getLeader();
         if (leader != null) {
-            if (leader.getName().equals(this.getName())) {
+            if (leader.getId() == (this.getId())) {
                 return result + " I am Leader of Class " + klass.getNumber() + ".";
             }
         }
