@@ -1,23 +1,23 @@
 package practice03;
 
 public class Student extends Person{
-    private String klass;
+    private int klass;
 
-    public Student(String name, int age) {
+    public Student(String name, int age, int klass) {
         super(name, age);
+        this.klass = klass;
     }
 
-
-    public String getKlass() {
+    public int getKlass() {
         return klass;
     }
 
-    public void setKlass(String klass) {
+    public void setKlass(int klass) {
         this.klass = klass;
     }
 
     @Override
     public String introduce() {
-        return "I am a Student. I am at "+klass+".";
+        return "I am a Student. I am at Class "+klass+".";
     }
 }
