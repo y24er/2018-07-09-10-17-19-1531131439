@@ -21,7 +21,7 @@ public class Student extends Person {
         String result = super.introduce() + " I am a Student.";
         Student leader = this.getKlass().getLeader();
         if (leader != null) {
-            if (leader.getId() == (this.getId())) {
+            if (this.equals(leader)) {
                 return result + " I am Leader of Class " + klass.getNumber() + ".";
             }
         }
