@@ -1,4 +1,51 @@
 package practice09;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Klass {
+    private int number;
+    private Student leader;
+    private List<Student> students;
+
+    public Klass(int number) {
+        this.number = number;
+        students = new ArrayList<Student>();
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public String getDisplayName() {
+        return "Class " + number;
+    }
+
+    public Student getLeader() {
+        return leader;
+    }
+
+    public void assignLeader(Student leader) {
+        if (students == null || students.size() == 0) {
+            System.out.print("It is not one of us.\n");
+            return;
+        }
+        this.leader = leader;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+
+    public void appendMember(Student student) {
+        students.add(student);
+    }
 }
