@@ -11,11 +11,7 @@ public class Student extends Person {
     public Klass getKlass() {
         return klass;
     }
-
-    public void setKlass(Klass klass) {
-        this.klass = klass;
-    }
-
+    
     @Override
     public String introduce() {
         String result = super.introduce() + " I am a Student.";
