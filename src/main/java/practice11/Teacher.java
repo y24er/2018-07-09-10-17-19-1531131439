@@ -3,9 +3,8 @@ package practice11;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Teacher extends Person implements JoinListener {
+public class Teacher extends Person implements JoinListener, LeaderListener {
     private List<Klass> classes;
-    private JoinListener joinListener;
 
     public Teacher(int id, String name, int age) {
         super(id, name, age);
@@ -16,7 +15,8 @@ public class Teacher extends Person implements JoinListener {
         super(id, name, age);
         this.classes = classes;
         for (Klass klass : classes) {
-            klass.attch(this);
+            klass.attachJoinListener(this);
+            klass.attachLeaderListener(this);
         }
     }
 
@@ -24,14 +24,10 @@ public class Teacher extends Person implements JoinListener {
         return classes;
     }
 
-    public void setClasses(List<Klass> classes) {
-        this.classes = classes;
-    }
-
     @Override
     public String introduce() {
         String result = super.introduce() + " I am a Teacher.";
-        if (classes.size() == 0)
+        if (classes.isEmpty())
             return result + " I teach No Class.";
         String klasses = "";
         for (int i = 0; i < classes.size(); i++) {
@@ -56,7 +52,6 @@ public class Teacher extends Person implements JoinListener {
     }
 
     public String introduceWith(Student student) {
-
         if (isTeaching(student)) {
             return super.introduce() + String.format(" I am a Teacher. I teach %s.", student.getName());
         }
@@ -64,8 +59,13 @@ public class Teacher extends Person implements JoinListener {
     }
 
     @Override
-    public void update(Student student) {
-        System.out.println(String.format("I am %s. I know %s has joined Class %d.", this.getName(), student.getName(), student.getKlass().getNumber()));
+    public void joinUpdate(Student student) {
+        System.out.print(String.format("I am %s. I know %s has joined Class %d.\n", this.getName(), student.getName(), student.getKlass().getNumber()));
+    }
+
+    @Override
+    public void leaderUpdate(Student student) {
+        System.out.print(String.format("I am %s. I know %s become Leader of Class %d.\n", this.getName(), student.getName(), student.getKlass().getNumber()));
     }
 }
 
