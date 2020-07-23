@@ -20,10 +20,6 @@ public class Teacher extends Person {
         return classes;
     }
 
-    public void setClasses(List<Klass> classes) {
-        this.classes = classes;
-    }
-
     @Override
     public String introduce() {
         String result = super.introduce() + " I am a Teacher.";
