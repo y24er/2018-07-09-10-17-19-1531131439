@@ -6,20 +6,15 @@ import java.util.List;
 public class Klass {
     private int number;
     private Student leader;
-    private List<Student> students;
     private List<JoinListener> joinListeners = new ArrayList<JoinListener>();
+    private List<LeaderListener> leaderListeners = new ArrayList<LeaderListener>();
 
     public Klass(int number) {
         this.number = number;
-        students = new ArrayList<Student>();
     }
 
     public int getNumber() {
         return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
     }
 
     public String getDisplayName() {
@@ -31,52 +26,49 @@ public class Klass {
     }
 
     public void assignLeader(Student leader) {
-        if (students == null || students.size() == 0) {
+        if (!isIn(leader)) {
             System.out.print("It is not one of us.\n");
             return;
         }
         this.leader = leader;
-    }
-
-    public List<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
+        notifyAllLeaderListeners(leader);
     }
 
     public void appendMember(Student student) {
-        students.add(student);
+        student.setKlass(this);
         notifyAllJoinListeners(student);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj instanceof Klass) {
-            return this.number == ((Klass) obj).getNumber();
-        } else
-            return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Klass klass = (Klass) o;
+        return number == klass.number;
     }
 
     public boolean isIn(Student student) {
-        boolean isIn = false;
-        for (Student stu : students) {
-            if (stu.equals(student))
-                isIn = true;
-        }
-        return isIn;
+        return student.getKlass().equals(this);
     }
 
-    public void attch(JoinListener joinListener) {
+    public void attachJoinListener(JoinListener joinListener) {
         joinListeners.add(joinListener);
     }
 
     public void notifyAllJoinListeners(Student student) {
         for (JoinListener joinListener : joinListeners) {
-            joinListener.update(student);
+            joinListener.joinUpdate(student);
+        }
+    }
+
+    public void attachLeaderListener(LeaderListener leaderListener) {
+        leaderListeners.add(leaderListener);
+    }
+
+    public void notifyAllLeaderListeners(Student leader) {
+        for (LeaderListener leaderListener : leaderListeners) {
+            leaderListener.leaderUpdate(leader);
+
         }
     }
 }
